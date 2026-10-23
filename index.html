@@ -29,6 +29,18 @@
       background: #e8f3ee;
     }
     a { color: #0a8754; }
+    button {
+      font-size: 16px;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 999px;
+      background: #0a8754;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    button:hover { background: #086b43; }
+    #count { font-size: 15px; color: #777; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -37,9 +49,30 @@
     <h1>你好，我是陆健</h1>
     <p>大一学生，正在学着把脑子里的想法，变成能打开的网页。</p>
     <p>
-      <a href="https://github.com/">GitHub</a> ·
+      <a href="https://github.com/lujian-dev">GitHub</a>
       <a href="mailto:you@example.com">邮件</a>
     </p>
+
+    <button id="btn">点一次数一颗星星</button>
+    <p id="count">你还一次都没点过</p>
   </div>
+
+  <script>
+    const btn = document.getElementById('btn');
+    const countEl = document.getElementById('count');
+
+    let count = Number(localStorage.getItem('clicks') || 0);
+
+    function render() {
+      countEl.textContent = count === 0 ? '快快快！' : `数了 ${count} 颗星星`;
+    }
+    render();
+
+    btn.addEventListener('click', () => {
+      count = count + 1;
+      localStorage.setItem('clicks', count);
+      render();
+    });
+  </script>
 </body>
 </html>
